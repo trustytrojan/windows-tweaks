@@ -1,11 +1,8 @@
 @echo off
 
-:: Check if image path was not given
-set image_path=%1
-
-if "%image_path%" == "" (
+if "%1"=="" (
 	echo You must provide a mounted Windows image path.
-	echo Usage: %0 <image path>
+	echo "Usage: %0 <image path>"
 	exit
 )
 
