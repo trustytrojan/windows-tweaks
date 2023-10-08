@@ -1,4 +1,3 @@
-# https://github.com/GGamer6458/postsetup
 # Network Optimizations (Credit to TCP Optimizer by https://www.speedguide.net/)
 Write-Output "Runnning Network Optimizations..."
 Set-NetTCPSetting -SettingName internet -AutoTuningLevelLocal disabled | Out-Null
