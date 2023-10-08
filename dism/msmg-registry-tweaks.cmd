@@ -3,6 +3,7 @@
 
 if "%1"=="" (
 	echo You must provide a mounted Windows image path.
+	echo You can provide the currently running Windows drive as the image path, however some tweaks will fail.
 	echo "Usage: %0 <image path>"
 	exit
 )
