@@ -7,7 +7,12 @@ if "%1"=="" (
 	exit
 )
 
-mount-registry %1
+echo Mounting Image Registry for Offline Editing
+reg load HKLM\mount_COMPONENTS "%1\Windows\System32\config\COMPONENTS" >nul
+reg load HKLM\mount_DEFAULT "%1\Windows\System32\config\default" >nul
+reg load HKLM\mount_NTUSER "%1\Users\Default\ntuser.dat" >nul
+reg load HKLM\mount_SOFTWARE "%1\Windows\System32\config\SOFTWARE" >nul
+reg load HKLM\mount_SYSTEM "%1\Windows\System32\config\SYSTEM" >nul
 
 echo HideTaskViewIcon
 reg add "HKLM\mount_NTUSER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f >nul 2>&1
