@@ -3,7 +3,7 @@ param(
 	[string]$imagePath
 )
 
-$keepRegex = "(Microsoft\.(Wallpaper|Windows\.(Wifi|Ethernet))|Windows\.Kernel.*|OpenSSH.+)"
+$keepRegex = "(Microsoft\.(Wallpaper|Windows\.(Wifi|Ethernet))|Windows\.Kernel.*|OpenSSH.+|Hello\.Face.+)"
 $toRemove = Get-WindowsCapability -Path mount | ?{ ($_.State -eq "Installed") -and ($_.Name -notmatch $keepRegex) } | %{ $_.Name }
 
 Write-Host "Removing the below capabilities:" -Background Blue
