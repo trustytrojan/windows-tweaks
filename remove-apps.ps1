@@ -1,4 +1,4 @@
-# Add to the regex any other apps you want to keep
+# Add to the regex any apps you want to keep
 $keepRegex = "Microsoft\.(WindowsStore|DesktopAppInstaller|ScreenSketch)"
 $toRemove = Get-AppxPackage | ?{ $_.Name -notmatch $keepRegex }
 
