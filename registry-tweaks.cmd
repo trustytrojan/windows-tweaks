@@ -1,4 +1,4 @@
-:: Credit to MSMG Toolkit.
+:: Credit to MSMG Toolkit
 @echo off
 
 if "%1"=="" (
