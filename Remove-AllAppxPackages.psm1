@@ -1,4 +1,4 @@
-function Remove-AllApps {
+function Remove-AllApp {
 	param(
  		[Parameter()]
   		[string]$ExceptRegex = ""
