@@ -9,10 +9,8 @@ function Disable-AllWindowsOptionalFeatures {
 
 	try {
 		if ($Path) {
-			Write-Debug "Using Path"
 			$optionalFeatures = Get-WindowsOptionalFeature -Path $Path
 		} else {
-			Write-Debug "Using Online"
 			$optionalFeatures = Get-WindowsOptionalFeature -Online
 		}
 	} catch {
@@ -30,6 +28,7 @@ function Disable-AllWindowsOptionalFeatures {
 
 	if ($toDisable.Length -eq 0) {
 		Write-Host "There are no features to disable." -ForegroundColor Green
+		return
 	}
 
 	Write-Host "Disabling the below features:" -ForegroundColor Blue
