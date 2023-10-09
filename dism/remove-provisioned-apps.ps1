@@ -4,7 +4,7 @@ param(
 )
 
 $keepRegex = "Microsoft\.(DesktopAppInstaller|ScreenSketch|StorePurchaseApp|WindowsStore).+"
-$toRemove = Get-ProvisionedAppxPackage -Path $Path | ?{ $_.PackageName -notmatch $keepRegex } | %{ $_.PackageName }
+$toRemove = Get-AppxProvisionedPackage -Path $Path | ?{ $_.PackageName -notmatch $keepRegex } | %{ $_.PackageName }
 
 Write-Host "Removing the below apps:" -Background Blue
 $toRemove
@@ -17,7 +17,19 @@ if ((Read-Host) -notin "", "Y", "y") {
 
 foreach ($packageName in $toRemove) {
 	Write-Host "`nRemoving $packageName" -Foreground Blue
-	Remove-ProvisionedAppxPackage -Path $Path -PackageName $packageName
+	Remove-AppxProvisionedPackage -Path $Path -PackageName $packageName
 }
 
 Write-Host "Finished removing apps!" -Foreground Green
+
+function Remove-AllProvisionedAppxPackages {
+	param(
+		[Parameter()]
+		[string]$ExceptRegex,
+
+		[Parameter()]
+		[string]$Path
+	)
+
+
+}

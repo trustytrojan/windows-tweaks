@@ -354,7 +354,7 @@ function Optimize-Network {
 	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\{eca522f4-2df2-4e86-a441-ebcec874e655}" -Name "TCPNoDelay" -Type String -Value "" | Out-Null
 }
 
-function Run-ServiceTweaks {
+function Optimize-Services {
 	Set-Service -Name "AJRouter" -StartupType "Disabled"
 	Set-Service -Name "ALG" -StartupType "Manual"
 	Set-Service -Name "AppIDSvc" -StartupType "Manual"

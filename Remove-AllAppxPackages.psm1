@@ -1,13 +1,17 @@
 function Remove-AllAppxPackages {
 	param(
  		[Parameter()]
-  		[string]$ExceptRegex = ""
+  		[string]$ExceptRegex
 	)
 
-	$toRemove = Get-AppxPackage | ?{ $_.Name -notmatch $ExceptRegex }
+	if ($ExceptRegex) {
+		$toRemove = Get-AppxPackage | Where-Object { $_.Name -notmatch $ExceptRegex }
+	} else {
+		$toRemove = Get-AppxPackage
+	}
 
 	Write-Host "Removing the below apps:" -Background Blue
-	$toRemove | %{ $_.Name }
+	$toRemove | ForEach-Object { $_.Name }
 	Write-Host "Do you want to proceed? [Y/n]" -NoNewLine -Background Blue
 	Write-Host " " -NoNewLine
 

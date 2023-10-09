@@ -1,4 +1,9 @@
 Import-Module .\tweaks.psm1
+Import-Module .\Remove-AllAppxPackages.psm1
+Import-Module .\dism\Disable-AllWindowsOptionalFeatures.psm1
+
+Remove-AllAppxPackages -ExceptRegex "Microsoft\.(WindowsStore|DesktopAppInstaller|ScreenSketch)"
+Disable-AllWindowsOptionalFeatures -ExceptRegex ".*RDC.*"
 
 Disable-AccessibilityKeyPrompts
 Disable-ActivityHistory
@@ -35,5 +40,4 @@ Uninstall-Teams
 Show-AllTrayIcons
 
 Optimize-Network
-
-Run-ServiceTweaks
+Optimize-Services
