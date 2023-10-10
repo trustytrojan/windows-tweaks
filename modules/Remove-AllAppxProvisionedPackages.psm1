@@ -1,5 +1,5 @@
 function Remove-AllAppxProvisionedPackages {
-	param(
+	param (
 		[Parameter()]
 		[string]$ExceptRegex,
 
@@ -29,26 +29,25 @@ function Remove-AllAppxProvisionedPackages {
 		return
 	}
 
-	Write-Host "Removing the below apps:" -Background Blue
+	Write-Host "The below provisioned AppX packages will be removed:" -ForegroundColor Blue
 	$toRemove | ForEach-Object { $_.DisplayName }
-	Write-Host "Do you want to proceed? [Y/n]" -NoNewLine -Background Blue
+	Write-Host "Do you want to proceed? [Y/n]" -NoNewLine -ForegroundColor Blue
 	Write-Host " " -NoNewLine
 
-	if ((Read-Host) -notin "", "Y", "y") {
+	if ((Read-Host) -notin "", "Y", "YES", "y", "yes") {
 		return
 	}
 
 	if ($Path) {
-		foreach ($appxPackage in $toRemove) {
-			Write-Host "Removing $($appxPackage.DisplayName)..."
-			Remove-AppxProvisionedPackage $appxPackage -Path $Path
-		}
+		$removeCall = { Remove-AppxProvisionedPackage $appxPackage -Path $Path }
 	} else {
-		foreach ($appxPackage in $toRemove) {
-			Write-Host "Removing $($appxPackage.DisplayName)..."
-			Remove-AppxProvisionedPackage $appxPackage -Online
-		}
+		$removeCall = { Remove-AppxProvisionedPackage $appxPackage -Online }
 	}
 
-	Write-Host "Finished removing apps!" -Foreground Green
+	foreach ($appxPackage in $toRemove) {
+		Write-Host "Removing $($appxPackage.DisplayName)..." -ForegroundColor Blue
+		$removeCall.Invoke()
+	}
+
+	Write-Host "Finished removing apps!" -ForegroundColor Green
 }

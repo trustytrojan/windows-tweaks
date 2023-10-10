@@ -1,9 +1,11 @@
-Import-Module .\tweaks.psm1
-Import-Module .\Remove-AllAppxPackages.psm1
-Import-Module .\dism\Disable-AllWindowsOptionalFeatures.psm1
+Import-Module ".\modules\RegistryTweaks.psm1"
+Import-Module ".\modules\Remove-AllAppxPackages.psm1"
+Import-Module ".\modules\Disable-AllWindowsOptionalFeatures.psm1"
+Import-Module ".\modules\Remove-AllWindowsCapabilities.psm1"
 
 Remove-AllAppxPackages -ExceptRegex "Microsoft\.(WindowsStore|DesktopAppInstaller|ScreenSketch)"
 Disable-AllWindowsOptionalFeatures -ExceptRegex ".*RDC.*"
+Remove-AllWindowsCapabilities -ExceptRegex "(Microsoft\.(Wallpaper|Windows\.(Wifi|Ethernet))|Windows\.Kernel.*|OpenSSH.+|Hello\.Face.+)"
 
 Disable-AccessibilityKeyPrompts
 Disable-ActivityHistory
